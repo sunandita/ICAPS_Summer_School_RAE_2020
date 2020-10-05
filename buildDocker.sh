@@ -34,7 +34,7 @@ then
 	fi
 	docker build --network=host -f Dockerfile -t $USER/rae .
 	#if [ -z $DISPLAY ]; then export DISPLAY=:0.0; fi
-	docker run -v $pwd/hostdir:/opt/hostdir \
+	docker run -v /Users/patras2/ICAPS_Summer_School_RAE_2020/hostdir:/app/ICAPS_Summer_School_RAE_2020/hostdir \
 	       	   -e DISPLAY=$IP:0 \
 	       	   -v /tmp/.X11-unix:/tmp/.X11-unix \
                -h docker \
