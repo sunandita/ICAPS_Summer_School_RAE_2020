@@ -1,0 +1,8 @@
+digraph G {
+	root_0 -> handle_event_1
+	handle_event_1 -> fix_ctrl_2
+	handle_event_1 -> fix_switch_3
+	fix_ctrl_2 -> ctrl_reinstall_fallback_4
+	fix_switch_3 -> NONE_5
+	ctrl_reinstall_fallback_4 -> reinstall_ctrl_fallback_6
+}
