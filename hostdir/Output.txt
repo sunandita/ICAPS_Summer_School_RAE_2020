@@ -1,0 +1,10 @@
+Robot r1 is already at location 1
+Perceived location 1
+Robot r1 has moved from 1 to 2
+Perceived location 2
+Robot r1 failed to move due to some internal failure
+Robot r1 has moved from 2 to 1
+Robot r1 is fully charged
+Robot r1 has moved from 1 to 3
+Perceived location 3
+Robot r1 has picked up object o1

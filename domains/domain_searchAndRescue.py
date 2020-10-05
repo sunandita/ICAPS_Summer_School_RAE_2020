@@ -9,7 +9,7 @@ from domain_constants import *
 import importlib
 #loader = importlib.find_loader('RAE1_and_RAEplan')
 #if loader is not None:
-import RAE1_and_RAEplan as alg
+import RAE1_and_UPOM as alg
 #else:
 #    import ape1_and_apeplan as alg
 import gui

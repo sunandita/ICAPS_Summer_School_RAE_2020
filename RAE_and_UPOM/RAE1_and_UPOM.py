@@ -1,7 +1,7 @@
 from __future__ import print_function
 
 """
-File RAE1_and_RAEplan.py
+File RAE1_and_UPOM.py
 Author:
 Sunandita Patra <patras@cs.umd.edu>
 """
@@ -27,13 +27,6 @@ from timer import globalTimer, DURATION
 from dataStructures import rL_APE, rL_PLAN
 from APE_stack import print_entire_stack, print_stack_size
 from utility import Utility
-from sharedData import *
-import stateSpaceUCT as ssu
-
-#learning stuff
-from learningData import trainingDataRecords
-#from paramInfo import *
-#from convertDataFormat import Encode_LearnM, Decode_LearnM, Encode_LearnH, Decode_LearnH, Encode_LearnMI, Decode_LearnMI
 
 ############################################################
 

@@ -2,7 +2,7 @@ __author__ = 'patras'
 
 from domain_constants import *
 import importlib
-import RAE1_and_RAEplan as alg
+import RAE1_and_UPOM as alg
 
 from state import state, rv
 import gui

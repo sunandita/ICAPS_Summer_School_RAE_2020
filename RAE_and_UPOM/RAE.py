@@ -1,13 +1,11 @@
 from __future__ import print_function
-from RAE1_and_RAEplan import ipcArgs, envArgs, RAE1, RAEplan_Choice, UPOM_Choice, GetBestTillNow
+from RAE1_and_UPOM import ipcArgs, envArgs, RAE1, RAEplan_Choice, UPOM_Choice, GetBestTillNow
 from dataStructures import PlanArgs
 from timer import globalTimer, SetMode
 from state import ReinitializeState, RemoveLocksFromState, RestoreState
 import threading
 import GLOBALS
 import os
-from sharedData import *
-from learningData import WriteTrainingData
 import signal
 import sys
 
@@ -254,7 +252,6 @@ def raeMult():
             else:
                 ipcArgs.sem[0].release()
 
-        WriteTrainingData()
     if GLOBALS.GetShowOutputs() == 'on':
         print("----Done with RAE----\n")
         PrintResult(taskInfo)
@@ -324,5 +321,4 @@ def PlannerMain(task, taskArgs, queue, candidateMethods, state, aTree, curUtil):
 
     CallPlanner(pArgs, queue)
 
-    WriteTrainingData() # data to be used for learning
     

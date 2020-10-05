@@ -4,34 +4,21 @@ import threading
 import sys
 
 sys.path.append('../shared/')
-sys.path.append('../shared/domains/')
-sys.path.append('../shared/domains/UnitTests/')
-sys.path.append('../shared/problems/SD/auto')
-sys.path.append('../shared/problems/SD/manual')
-sys.path.append('../shared/problems/CR/auto')
-sys.path.append('../shared/problems/CR/manual')
-sys.path.append('../shared/problems/IP/auto')
-sys.path.append('../shared/problems/IP/manual')
-sys.path.append('../shared/problems/EE/auto')
-sys.path.append('../shared/problems/EE/manual')
-sys.path.append('../shared/problems/OF/auto')
-sys.path.append('../shared/problems/OF/manual')
-sys.path.append('../shared/problems/SR/auto')
-#sys.path.append('../shared/problems/SR/manual')
-sys.path.append('../shared/problems/SDN/auto')
-sys.path.append('../shared/problems/unitTests')
-sys.path.append('../learning/')
-sys.path.append('../learning/encoders/')
+sys.path.append('../domains/')
+sys.path.append('../problems/SD/auto')
+sys.path.append('../problems/CR/auto')
+sys.path.append('../problems/EE/auto')
+sys.path.append('../problems/OF/auto')
+sys.path.append('../problems/SR/auto')
 
 import argparse
 import gui
 import GLOBALS
 from RAE import raeMult, InitializeDomain
-from RAE1_and_RAEplan import verbosity
+from RAE1_and_UPOM import verbosity
 from timer import SetMode
 import multiprocessing
 import os
-from sharedData import *
 
 def testRAEandPlanner(domain, problem, usePlanner):
     '''
@@ -102,18 +89,12 @@ if __name__ == "__main__":
                            type=str, default='CR', required=False)
     argparser.add_argument("--problem", help="identifier for the problem eg. 'problem1', 'problem2', etc",
                            type=str, default="problem11", required=False)
-    argparser.add_argument("--planner", help="Which planner? ('RAEPlan' or 'UPOM' or 'None')",
+    argparser.add_argument("--planner", help="Which planner? ('UPOM' or 'None')",
                            type=str, default='UPOM', required=False)
     argparser.add_argument("--clockMode", help="Mode of the clock ('Counter' or 'Clock')",
                            type=str, default='Counter', required=False)
     argparser.add_argument("--showOutputs", help="Whether to display the outputs of commands or not? (set 'on' for more clarity and 'off' for batch runs)",
                            type=str, default='on', required=False)
-    
-    # parameters of SLATE
-    argparser.add_argument("--b", help="Number of methods RAEplan should look at",
-                           type=int, default=2, required=False)
-    argparser.add_argument("--k", help="Number of commands samples RAEplan should look at",
-                           type=int, default=1, required=False)
 
     argparser.add_argument("--depth", help="Search Depth",
                            type=int, default=50, required=False)
@@ -129,25 +110,16 @@ if __name__ == "__main__":
     #what to optimize?
     argparser.add_argument("--utility", help="efficiency or successRatio or resilience?",
                            type=str, default="efficiency", required=False)
-    
-    #use learned models?
-    argparser.add_argument("--useTrainedModel", help="learnM1 or learnM2 or learnH or learnMI or None?", 
-                        type=str, default=None, required=False)
-    
-    argparser.add_argument("--useBackupUCT", help="If planners fails, do you want to run UCT with only commands?",
-                        type=bool, default=False, required=False)
 
     argparser.add_argument("--doIterativeDeepening", help="Increment depth in steps of 5?",
                         type=bool, default=False, required=False)
 
     args = argparser.parse_args()
 
-    if args.planner == 'UPOM' or args.planner == "RAEPlan":
-        assert(args.useTrainedModel == None or args.useTrainedModel == 'None' or args.useTrainedModel == 'learnH')
 
     # params for RAEplan: b and k
-    GLOBALS.Setb(args.b)
-    GLOBALS.Setk(args.k)
+    GLOBALS.Setb(1)
+    GLOBALS.Setk(1)
 
     assert(args.depth >= 1)
     GLOBALS.SetMaxDepth(args.depth)
@@ -162,11 +134,11 @@ if __name__ == "__main__":
     GLOBALS.SetDomain(args.domain)
     GLOBALS.SetTimeLimit(args.timeLim)
     GLOBALS.SetDataGenerationMode(None)
-    GLOBALS.SetUseTrainedModel(args.useTrainedModel)
-    GLOBALS.SetModelPath("../learning/models/AIJ2020/")
+    GLOBALS.SetUseTrainedModel(None)
+    GLOBALS.SetModelPath("..")
     GLOBALS.SetDoIterativeDeepening(args.doIterativeDeepening)
 
-    GLOBALS.SetBackupUCT(args.useBackupUCT) # for SDN
+    GLOBALS.SetBackupUCT(False) # for SDN
 
     assert(args.utility == "efficiency" or args.utility == "successRatio" or args.utility == "resilience")
     GLOBALS.SetUtility(args.utility)

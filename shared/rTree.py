@@ -6,7 +6,6 @@ from timer import DURATION
 import types
 from utility import Utility
 import GLOBALS
-from learningData import TrainingDataItem
 import pdb
 
 rollOuts = 0
