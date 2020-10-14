@@ -12,4 +12,4 @@ RUN pip3 install numpy
 ADD . /app/ICAPS_Summer_School_RAE_2020
 WORKDIR /app/ICAPS_Summer_School_RAE_2020/RAE_and_UPOM
 #ENTRYPOINT ["python3", "testRAEandUPOM.py", "-h"]
-ENTRYPOINT ["python3", "testRAEandUPOM.py", "--domain", "CR", "--problem", "problem1001"]
+ENTRYPOINT ["python3", "testRAEandUPOM.py", "--domain", "CR", "--problem", "problem5", "--v", "1"]

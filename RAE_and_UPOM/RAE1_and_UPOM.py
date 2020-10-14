@@ -326,7 +326,7 @@ def GetCandidateByPlanning(candidates, task, taskArgs):
     """
     if verbose > 0:
         #print(colorama.Fore.RED, "Starting simulation for stack")
-        print("Starting simulation for stack")
+        print("Calling planner UPOM ...")
 
     if raeLocals.GetUseBackupUCT() == True:
         planM = ssu.StateSpaceUCTMain(task, taskArgs)
@@ -559,9 +559,9 @@ def DoTask_Acting(task, taskArgs):
         raise Incorrect_return_code('{} for {}{}'.format(retcode, task, taskArgs))
 
 def CallMethod_OperationalModel(stackid, m, taskArgs):
-    if verbose > 0:
+    if verbose > 0 and GLOBALS.GetPlanningMode() == False:
         print_stack_size(stackid, path)
-        print('Try method {}{}'.format(m.GetName(),taskArgs))
+        print('Trying method {}{}'.format(m.GetName(),taskArgs))
 
     retcode = 'Failure'
     try:
@@ -571,10 +571,10 @@ def CallMethod_OperationalModel(stackid, m, taskArgs):
             node = raeLocals.GetCurrentNode()
             node.SetPrevState(GetState().copy())
 
-        if verbose > 0:
+        if verbose > 0 and GLOBALS.GetPlanningMode() == False:
             print_stack_size(stackid, path)
             print("Executing method {}{}".format(m.GetName(), taskArgs))
-        if verbose > 1:
+        if verbose > 1 and GLOBALS.GetPlanningMode() == False:
             print_stack_size(stackid, path)
             print('Current state is:'.format(stackid))
             PrintState()
@@ -582,15 +582,15 @@ def CallMethod_OperationalModel(stackid, m, taskArgs):
         m.Call()  # This is the main job of this function, CallMethod
         retcode = 'Success'
     except Failed_command as e:
-        if verbose > 0:
+        if verbose > 0 and GLOBALS.GetPlanningMode() == False:
             print_stack_size(stackid, path)
             print('Failed command {}'.format(e))
     except Failed_task as e:
-        if verbose > 0:
+        if verbose > 0 and GLOBALS.GetPlanningMode() == False:
             print_stack_size(stackid, path)
             print('Failed task {}'.format(e))
 
-    if verbose > 1:
+    if verbose > 1 and GLOBALS.GetPlanningMode() == False:
         print_stack_size(stackid, path)
         print('{} for method {}{}'.format(retcode, m.GetName(), taskArgs))
 
@@ -641,7 +641,7 @@ def RAEplan_Choice(task, planArgs):
         
     InitializePlanningTree() 
 
-    if verbose > 1:
+    if verbose > 1 and GLOBALS.GetPlanningMode() == False:
         print_stack_size(planLocals.GetStackId(), path)
         print('Initial state is:')
         PrintState()
@@ -664,7 +664,7 @@ def RAEplan_Choice(task, planArgs):
         else:
             pass
 
-    if verbose > 1:
+    if verbose > 1 and GLOBALS.GetPlanningMode() == False:
         print_stack_size(planLocals.GetStackId(), path)
         print('Final state is:')
         PrintState()
@@ -708,7 +708,7 @@ def UPOM_Choice(task, planArgs):
         
     InitializePlanningTree() 
 
-    if verbose > 1:
+    if verbose > 1 and GLOBALS.GetPlanningMode() == False:
         print_stack_size(planLocals.GetStackId(), path)
         print('Initial state is:')
         PrintState()
@@ -738,7 +738,7 @@ def UPOM_Choice(task, planArgs):
             pass
         i += 1
 
-    if verbose > 1:
+    if verbose > 1 and GLOBALS.GetPlanningMode() == False:
         print_stack_size(planLocals.GetStackId(), path)
         print('Final state is:')
         PrintState()
@@ -986,7 +986,7 @@ def DoMethod(m, task, taskArgs):
     retcode = CallMethod_OperationalModel(planLocals.GetStackId(), m, taskArgs)
 
     #path[planLocals.GetStackId()].pop()
-    if verbose > 1:
+    if verbose > 1 and GLOBALS.GetPlanningMode() == False:
         print_entire_stack(planLocals.GetStackId(), path)
 
     if retcode == 'Failure':
@@ -1191,12 +1191,12 @@ def CallCommand_OperationalModel(cmd, cmdArgs):
     #        EndCriticalRegion()
     #        BeginCriticalRegion(planLocals.GetStackId())
 
-    if verbose > 0:
+    if verbose > 0 and GLOBALS.GetPlanningMode() == False:
         print_stack_size(planLocals.GetStackId(), path)
         print('Command {}{} is done'.format( cmd.__name__, cmdArgs))
 
     retcode = cmdRet['state']
-    if verbose > 1:
+    if verbose > 1 and GLOBALS.GetPlanningMode() == False:
         print_stack_size(planLocals.GetStackId(), path)
         print('Command {}{} returned {}'.format( cmd.__name__, cmdArgs, retcode))
         print_stack_size(planLocals.GetStackId(), path)
@@ -1366,14 +1366,14 @@ def GetEfficiency(cmd, cmdArgs):
 ## Verbosity functions 
 
 def v_begin(task, taskArgs):
-    if verbose > 0:
+    if verbose > 0 and GLOBALS.GetPlanningMode() == False:
         print_stack_size(raeLocals.GetStackId(), path)
         print('Begin task {}{}'.format(task, taskArgs))
 
     v_path()
 
 def v_begin_c(cmd, cmdArgs):
-    if verbose > 0:
+    if verbose > 0 and GLOBALS.GetPlanningMode() == False:
         print_stack_size(planLocals.GetStackId(), path)
         print('Begin command {}{}'.format(cmd.__name__, cmdArgs))
 
@@ -1382,19 +1382,19 @@ def PushToPath(task, taskArgs):
     path[raeLocals.GetStackId()].append([task, taskArgs])
 
 def v_path():
-    if verbose > 1:
+    if verbose > 1 and GLOBALS.GetPlanningMode() == False:
         if GLOBALS.GetPlanningMode() == True:
             print_entire_stack(planLocals.GetStackId(), path)
         else:
             print_entire_stack(raeLocals.GetStackId(), path)
 
 def v_failedCommand(e):
-    if verbose > 0:
+    if verbose > 0 and GLOBALS.GetPlanningMode() == False:
         print_stack_size(planLocals.GetStackId(), path)
         print('Failed command {}'.format(e))
 
 def v_failedTask(e):
-    if verbose > 0:
+    if verbose > 0 and GLOBALS.GetPlanningMode() == False:
         print_stack_size(planLocals.GetStackId(), path)
         print('Failed task {}'.format(e))
 

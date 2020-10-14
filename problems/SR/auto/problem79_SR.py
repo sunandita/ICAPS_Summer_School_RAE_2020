@@ -6,7 +6,7 @@ from state import state
 def GetCostOfMove(r, l1, l2, dist):
     return dist
 
-DURATION.COUNTER = {
+DURATION.TIME = {
     'giveSupportToPerson': 15,
     'clearLocation': 5,
     'inspectPerson': 20,
@@ -40,22 +40,22 @@ DURATION.COUNTER = {
 
 rv.WHEELEDROBOTS = ['w1', 'w2']
 rv.DRONES = ['a1']
-rv.OBSTACLES = { (100, 100)}
+rv.OBSTACLES = { (13, 12)}
 
 def ResetState():
-    state.loc = {'w1': (7,16), 'w2': (29,6), 'p1': (16,26), 'a1': (29,27)}
-    state.hasMedicine = {'a1': 0, 'w1': 0, 'w2': 0}
+    state.loc = {'w1': (8,14), 'w2': (18,7), 'p1': (18,11), 'a1': (28,22)}
+    state.hasMedicine = {'a1': 0, 'w1': 5, 'w2': 0}
     state.robotType = {'w1': 'wheeled', 'a1': 'uav', 'w2': 'wheeled'}
-    state.status = {'w1': 'free', 'w2': 'free', 'a1': UNK, 'p1': UNK, (16,26): UNK}
+    state.status = {'w1': 'free', 'w2': 'free', 'a1': UNK, 'p1': UNK, (18,11): UNK}
     state.altitude = {'a1': 'high'}
     state.currentImage = {'a1': None}
-    state.realStatus = {'w1': 'OK', 'p1': 'OK', 'w2': 'OK', 'a1': OK, (16, 26): 'hasDebri'}
-    state.realPerson = {(16,26): 'p1'}
+    state.realStatus = {'w1': 'OK', 'p1': 'OK', 'w2': 'OK', 'a1': OK, (18, 11): 'hasDebri'}
+    state.realPerson = {(18,11): 'p1'}
     state.newRobot = {1: None}
-    state.weather = {(16,26): "dustStorm"}
+    state.weather = {(18,11): "foggy"}
 
 tasks = {
-    4: [['survey', 'a1', (16,26)]]
+    6: [['survey', 'a1', (18,11)]]
 }
 eventsEnv = {
 }

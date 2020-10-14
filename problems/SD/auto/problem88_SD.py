@@ -2,7 +2,7 @@ __author__ = 'patras'
 
 from domain_springDoor import *
 from timer import DURATION
-from state import state
+from state import state, rv
 
 DURATION.TIME = {
     'unlatch1': 5,
@@ -11,7 +11,7 @@ DURATION.TIME = {
     'passDoor': 3,
     'releaseDoor': 2,
     'closeDoors': 3,
-    'move': 10,
+    'move': 7,
     'take': 2,
     'put': 2,
 }
@@ -23,29 +23,28 @@ DURATION.COUNTER = {
     'passDoor': 3,
     'releaseDoor': 2,
     'closeDoors': 3,
-    'move': 10,
+    'move': 7,
     'take': 2,
     'put': 2,
 }
 
-rv.LOCATIONS = [1, 2, 3, 4, 5, 6, 7, 8]
-rv.EDGES = {1: [2, 3], 2: [1, 4, 8], 3: [1, 4, 6], 4: [3, 2, 5], 5: [4, 7], 6: [3], 7: [5], 8: [2]}
-rv.DOORLOCATIONS = {(2, 8): 'd1', (2, 4): 'd2', (5, 7): 'd3', (3, 6): 'd4', (1, 3): 'd5', (1, 2): 'd6', (4, 5): 'd7'}
-rv.ROBOTS = ['r1', 'r2', 'r3']
-rv.DOORS = ['d1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7']
-rv.DOORTYPES = {'d1': 'spring', 'd2': 'ordinary', 'd3': 'ordinary', 'd4': 'ordinary', 'd5': 'ordinary', 'd6': 'ordinary', 'd7': 'ordinary'}
+rv.LOCATIONS = [1, 2, 3, 4, 5]
+rv.EDGES = {1: [2], 2: [1, 3], 3: [2, 4, 5], 4: [3], 5: [3]}
+rv.DOORS = ['d1', 'd2']
+rv.DOORLOCATIONS = {(2, 3): 'd1', (3, 5): 'd2'}
+rv.DOORTYPES = {'d1': 'spring', 'd2': 'spring'}
+rv.ROBOTS = ['r1', 'r2', 'r3', 'r4']
 
 def ResetState():
-    state.load = {'r1': NIL, 'r2': NIL, 'r3': NIL}
-    state.doorStatus = {'d1': 'closed', 'd2': 'closed', 'd3': 'closed', 'd4': 'closed', 'd5': 'closed', 'd6': 'closed', 'd7': 'closed'}
-    state.loc = {'r1': 7, 'r2': 2, 'r3': 4}
-    state.pos = {'o1': 7, 'o2': 7, 'o3': 8}
-    state.done = {0: False}
-    state.doorType = {'d1': UNK, 'd2': UNK, 'd3': UNK, 'd4': UNK, 'd5': UNK, 'd6': UNK, 'd7': UNK}
+    state.load = {'r1': NIL, 'r2': NIL, 'r3': NIL, 'r4': NIL}
+    state.status = {'r1': 'free', 'r2': 'free', 'r3': 'free', 'r4': 'free'}
+    state.loc = {'r1': 4, 'r2': 3, 'r3': 4, 'r4': 2}
+    state.pos = {'o1': 2}
+    state.doorStatus = {'d1': 'closed', 'd2': 'closed', }
+    state.doorType = {'d1': UNK, 'd2': UNK, }
 
 tasks = {
-    3: [['fetch', 'r3', 'o1', 8]]
+    7: [['fetch', 'r1', 'o1', 3]],
 }
-
-eventsEnv = {}
-
+eventsEnv = {
+}

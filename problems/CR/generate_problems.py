@@ -47,7 +47,7 @@ class Map():
 MAPS = [Map(1), Map(2), Map(3)]
 
 def generateProblems():
-    num = 100
+    num = 1
     for cost_index in range(1, 3):
         for map in MAPS:
             for loc in map.locations[1:3]:
@@ -132,7 +132,7 @@ def generateProblemsEmergencyWithoutSearch():
 
 def writeProblem(num, map, cost_index, loc, charge, chargerLoc, obj_loc, pos, emergency):
     
-    fname = 'training/problem{}_CR.py'.format(num)
+    fname = 'auto/problem{}_CR.py'.format(num)
     file = open(fname,"w") 
     writeHeader(file, cost_index)
 
@@ -271,8 +271,9 @@ def writeHeader(file, index):
         file.write("}\n\n") 
 
 if __name__=="__main__":
-    generateProblemsSearchWithNotEnoughCharge()
-    generateProblemsSearchWithEmergency()
-    generateProblemsCarryCharger()
-    generateProblemsChargerWithAnotherRobot()
-    generateProblemsEmergencyWithoutSearch()
+    generateProblems()
+    # generateProblemsSearchWithNotEnoughCharge()
+    # generateProblemsSearchWithEmergency()
+    # generateProblemsCarryCharger()
+    # generateProblemsChargerWithAnotherRobot()
+    # generateProblemsEmergencyWithoutSearch()

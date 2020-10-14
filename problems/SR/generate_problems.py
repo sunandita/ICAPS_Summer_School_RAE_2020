@@ -34,7 +34,7 @@ def GetObstacles(w1_locx, w1_locy, p_locx, p_locy):
     return [(100,100), (x1, y1), (x2, y2)]
 
 def generateProblems():
-    num = 19
+    num = 1
     for weather in ["clear", "rainy", "dustStorm", "foggy"]:
         for i in range(0, 2):
             p_locx = random.randint(5, 30)
@@ -59,7 +59,7 @@ def generateProblems():
 
 def writeProblem(num, w1_locx, w1_locy, p_locx, p_locy, w2_locx, w2_locy, 
                             obstacle, medicine, emergency, weather, a1_locx, a1_locy):
-    fname = 'training/problem{}_SR.py'.format(num)
+    fname = 'auto/problem{}_SR.py'.format(num)
     file = open(fname,"w") 
     writeHeader(file)
     file.write("rv.OBSTACLES = { ")

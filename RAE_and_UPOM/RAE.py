@@ -62,15 +62,13 @@ def InitializeDomain(domain, problem, startState=None):
     :param problem: id of the problem
     :return:none
     '''
-    if domain in ['CR', 'SD', 'EE', 'IP', 'OF', 'SR', 'test', 'testInstantiation', 'SR2', 'testSSU',  'testMethodswithCosts', "SDN"]:
+    if domain in ['CR', 'SD', 'EE', 'SR', 'OF', 'test']:
         module = problem + '_' + domain
         global problem_module
         ReinitializeState()    # useful for batch runs to start with the starting state
         problem_module = __import__(module)
         problem_module.ResetState()
         return problem_module
-    elif domain == 'SDN_dev':
-        RestoreState(startState)
     else:
         print("Invalid domain\n", domain)
         exit(11)
@@ -91,36 +89,17 @@ def CreateNewStack(taskInfo, raeArgs):
     taskInfo[stackid] = ([raeArgs.task] + raeArgs.taskArgs, retcode, retryCount, eff, height, taskCount, commandCount, utilVal, utilitiesList)
 
 def PrintResult(taskInfo):
-    print('ID ','\t','Task',
-            '\t\t\t', 'Result',
-            '\t\t\t', 'Retry Count', 
-            '\t\t\t', 'Efficiency', 
-            '\t\t\t', 'height',
-            '\t\t\t', '#tasks',
-            '\t\t\t', '#commands',
-            '\t\t\t'
-            '\n')
+    print("RESULTS:")
     for stackid in taskInfo:
         args, res, retryCount, eff, height, taskCount, commandCount, utilVal, utilitiesList = taskInfo[stackid]
         
-        print(stackid,'\t','Task {}{}'.format(args[0], args[1:]),
-            '\t\t\t', res,
-            '\t\t\t', retryCount, 
-            '\t\t\t', eff, 
-            '\t\t\t', height,
-            '\t\t\t', taskCount,
-            '\t\t\t', commandCount,
-            '\t\t\t', utilVal,
-            '\n')
-        print(stackid, '\t', 'Task {}{}'.format(args[0], args[1:]),
-            '\t')
-
-        utilString = ""
-        for u in utilitiesList:
-            utilString += str(u)  
-            utilString += ","
-
-        print(utilString)
+        print(
+            '\n Task : ', '\t{}{}'.format(args[0], args[1:]),
+            '\n Result : \t', res,
+            '\n Retry Count: \t', retryCount, 
+            '\n Efficiency: \t', eff, 
+            )
+        print("-----------------")
 
 def PrintResultSummaryVersion1(taskInfo):
     succ = 0

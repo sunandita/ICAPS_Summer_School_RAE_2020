@@ -2,7 +2,7 @@ __author__ = 'patras'
 
 from domain_springDoor import *
 from timer import DURATION
-from state import state
+from state import state, rv
 
 DURATION.TIME = {
     'unlatch1': 5,
@@ -11,7 +11,7 @@ DURATION.TIME = {
     'passDoor': 3,
     'releaseDoor': 2,
     'closeDoors': 3,
-    'move': 10,
+    'move': 7,
     'take': 2,
     'put': 2,
 }
@@ -23,29 +23,29 @@ DURATION.COUNTER = {
     'passDoor': 3,
     'releaseDoor': 2,
     'closeDoors': 3,
-    'move': 10,
+    'move': 7,
     'take': 2,
     'put': 2,
 }
 
 rv.LOCATIONS = [1, 2, 3, 4, 5, 6]
-rv.EDGES = {1: [2], 2: [1, 3, 4], 3: [2, 5], 4: [2, 6], 5: [3], 6: [4]}
-rv.DOORLOCATIONS = {(1, 2): 'd1', (2, 3): 'd2'}
-rv.ROBOTS = ['r1', 'r2']
-rv.DOORS = ['d1', 'd2']
-rv.DOORTYPES = {'d1': 'spring', 'd2': 'spring'}
+rv.EDGES = {1: [4], 2: [5], 3: [6], 4: [1, 5], 5: [2, 4, 6], 6: [3, 5]}
+rv.DOORS = ['d1', 'd2', 'd3']
+rv.DOORLOCATIONS = {(1, 4): 'd3', (2, 5): 'd2', (3, 6): 'd1'}
+rv.DOORTYPES = {'d1': 'ordinary', 'd2': 'spring', 'd3': 'spring'}
+rv.ROBOTS = ['r1', 'r2', 'r3']
 
 def ResetState():
-    state.load = {'r1': NIL, 'r2': NIL}
-    state.doorStatus = {'d1': 'closed', 'd2': 'closed'}
-    state.loc = {'r1': 1, 'r2': 2}
-    state.pos = {'o1': 1, 'o2': 4}
-    state.done = {0: False}
-    state.doorType = {'d1': UNK, 'd2': UNK}
+    state.load = {'r1': NIL, 'r2': NIL, 'r3': NIL}
+    state.status = {'r1': 'free', 'r2': 'free', 'r3': 'free'}
+    state.loc = {'r1': 1, 'r2': 6, 'r3': 1}
+    state.pos = {'o1': 3}
+    state.doorStatus = {'d1': 'closed', 'd2': 'closed', 'd3': 'closed', }
+    state.doorType = {'d1': UNK, 'd2': UNK, 'd3': UNK, }
 
 tasks = {
-    4: [['fetch', 'r1', 'o1', 2]]
+    9: [['fetch', 'r1', 'o1', 3]],
+    11: [['collision', 'r1']],
 }
-
-eventsEnv = {}
-
+eventsEnv = {
+}

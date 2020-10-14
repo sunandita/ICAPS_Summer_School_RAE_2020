@@ -89,26 +89,23 @@ if __name__ == "__main__":
                            type=str, default='CR', required=False)
     argparser.add_argument("--problem", help="identifier for the problem eg. 'problem1', 'problem2', etc",
                            type=str, default="problem11", required=False)
-    argparser.add_argument("--planner", help="Which planner? ('UPOM' or 'None')",
-                           type=str, default='UPOM', required=False)
-    argparser.add_argument("--clockMode", help="Mode of the clock ('Counter' or 'Clock')",
-                           type=str, default='Counter', required=False)
-    argparser.add_argument("--showOutputs", help="Whether to display the outputs of commands or not? (set 'on' for more clarity and 'off' for batch runs)",
-                           type=str, default='on', required=False)
 
-    argparser.add_argument("--depth", help="Search Depth",
+    argparser.add_argument("--planner", help="Which planner to use? UPOM or None",
+                           type=str, default="problem11", required=False)
+
+    argparser.add_argument("--depth", help="Maximum Search Depth",
                            type=int, default=50, required=False)
     argparser.add_argument("--heuristic", help="Name of the heuristic function",
                            type=str, default='h2', required=False)
 
-    argparser.add_argument("--timeLim", help="What is the time limit? ",
+    argparser.add_argument("--timeLim", help="What is the time limit for running RAE? ",
                            type=int, default=300, required=False)
     # parameter for UPOM
     argparser.add_argument("--n_RO", help="Number of rollouts in UPOM?",
                            type=int, default=500, required=False)
 
     #what to optimize?
-    argparser.add_argument("--utility", help="efficiency or successRatio or resilience?",
+    argparser.add_argument("--utility", help="efficiency or successRatio?",
                            type=str, default="efficiency", required=False)
 
     argparser.add_argument("--doIterativeDeepening", help="Increment depth in steps of 5?",
@@ -117,18 +114,14 @@ if __name__ == "__main__":
     args = argparser.parse_args()
 
 
-    # params for RAEplan: b and k
-    GLOBALS.Setb(1)
-    GLOBALS.Setk(1)
-
     assert(args.depth >= 1)
     GLOBALS.SetMaxDepth(args.depth)
     GLOBALS.SetHeuristicName(args.heuristic)
 
     verbosity(args.v)
-    SetMode(args.clockMode)
+    SetMode("Counter")
 
-    GLOBALS.SetShowOutputs(args.showOutputs)
+    GLOBALS.SetShowOutputs("on")
 
     GLOBALS.Set_nRO(args.n_RO)
     GLOBALS.SetDomain(args.domain)
