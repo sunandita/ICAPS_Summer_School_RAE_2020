@@ -275,6 +275,7 @@ def CallPlanner(pArgs, queue):
 
     else:
         print("Invalid planner")
+        exit()
 
 
     queue.put((method, util, planningTime))

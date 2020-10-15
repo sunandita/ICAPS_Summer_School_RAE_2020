@@ -10,6 +10,7 @@ sys.path.append('../problems/CR/auto')
 sys.path.append('../problems/EE/auto')
 sys.path.append('../problems/OF/auto')
 sys.path.append('../problems/SR/auto')
+sys.path.append('../problems/test')
 
 import argparse
 import gui

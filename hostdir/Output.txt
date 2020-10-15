@@ -1,7 +1,6 @@
-Robot r2 has put object c1 at location 1
-Robot r1 is already at location 2
-Robot r1 does not have enough charge to move from 2 to 1
-Robot r1 has addressed emergency 1
-Robot r1 does not have enough charge to move from 2 to 1
-Robot r1 does not have enough charge to move from 2 to 1
-Robot r1 does not have enough charge to move from 2 to 8
+15.0Doing c1.
+Doing c3.
+4.0Doing c1.
+Doing c3.
+Doing c2.
+Doing c3.
