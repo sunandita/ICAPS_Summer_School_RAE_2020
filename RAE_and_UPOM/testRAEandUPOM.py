@@ -91,7 +91,7 @@ if __name__ == "__main__":
                            type=str, default="problem11", required=False)
 
     argparser.add_argument("--planner", help="Which planner to use? UPOM or None",
-                           type=str, default="problem11", required=False)
+                           type=str, default="UPOM", required=False)
 
     argparser.add_argument("--depth", help="Maximum Search Depth",
                            type=int, default=50, required=False)

@@ -62,6 +62,8 @@ Install conda: https://docs.conda.io/projects/conda/en/latest/user-guide/install
 
 conda env create -f RAE.yml
 
+conda activate RAE
+
 To test problem5 of chargeable_robot, use the commands:
 
 cd ./RAE_and_UPOM
