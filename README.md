@@ -72,6 +72,8 @@ python3 testRAEandUPOM.py --domain CR --problem problem5
 
 DOCKER SETUP STEPS:
 
+Install Docker: https://docs.docker.com/get-docker/
+
 Run ./buildDocker.sh only once
 
 Run docker ps -a # to get the container_ID
