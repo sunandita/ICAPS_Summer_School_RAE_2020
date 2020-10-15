@@ -1,4 +1,40 @@
+# RAE and UPOM
+
 RAE and UPOM together form a refinement acting-and-planning engine.
+
+# Conda setup steps:
+
+Install conda: https://docs.conda.io/projects/conda/en/latest/user-guide/install/
+
+conda env create -f RAE.yml
+
+conda activate RAE
+
+To test problem5 of chargeable_robot, use the commands:
+
+cd ./RAE_and_UPOM
+
+python3 testRAEandUPOM.py --domain CR --problem problem5
+
+# Docker setup steps:
+
+Install Docker: https://docs.docker.com/get-docker/
+
+Run ./buildDocker.sh only once
+
+Run docker ps -a # to get the *container_ID*
+
+docker start *container_ID*
+
+docker attach *container_ID*
+
+cd /app/ICAPS_Summer_School_RAE_2020/RAE_and_UPOM 
+
+python3 testRAEandUPOM.py --domain CR --problem problem5
+
+exit # To exit from docker container 
+
+# Test Domains
 
 We have the following domains in the ./domains folder.
 
@@ -14,7 +50,7 @@ We have the following domains in the ./domains folder.
 
 6. domain_test: To modify and play with
 
-HOW TO USE?
+# How to run?
 
 To test on any domain, use the following command in terminal
 
@@ -47,7 +83,7 @@ orderFulfillment: 'OF',
 test: 'test'
 
 
-HOW TO ADD NEW PROBLEMS? 
+# How to add new problems? 
 
 Please go inside the folder ./problems/<domain> to view examples of problem files. A problem file  specifies the initial state, the tasks arriving at different times and various parameters specific to the domain. Please follow the
 following syntax to name a problem file.
@@ -55,40 +91,5 @@ following syntax to name a problem file.
 problemId_DomainID.py
 
 For example, a problem of SD domain with problemId 'problem1' should be named problem1_SD.py.
-
-CONDA SETUP STEPS:
-
-Install conda: https://docs.conda.io/projects/conda/en/latest/user-guide/install/
-
-conda env create -f RAE.yml
-
-conda activate RAE
-
-To test problem5 of chargeable_robot, use the commands:
-
-cd ./RAE_and_UPOM
-
-python3 testRAEandUPOM.py --domain CR --problem problem5
-
-DOCKER SETUP STEPS:
-
-Install Docker: https://docs.docker.com/get-docker/
-
-Run ./buildDocker.sh only once
-
-Run docker ps -a # to get the container_ID
-
-docker start container_ID
-
-docker attach container_ID
-
-cd /app/ICAPS_Summer_School_RAE_2020/RAE_and_UPOM 
-
-python3 testRAEandUPOM.py --domain CR --problem problem5
-
-exit # To exit from docker container 
-
-
-
 
 
