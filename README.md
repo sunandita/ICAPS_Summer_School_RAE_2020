@@ -56,6 +56,18 @@ problemId_DomainID.py
 
 For example, a problem of SD domain with problemId 'problem1' should be named problem1_SD.py.
 
+CONDA SETUP STEPS:
+
+Install conda: https://docs.conda.io/projects/conda/en/latest/user-guide/install/
+
+conda env create -f RAE.yml
+
+To test problem5 of chargeable_robot, use the commands:
+
+cd ./RAE_and_UPOM
+
+python3 testRAEandUPOM.py --domain CR --problem problem5
+
 DOCKER SETUP STEPS:
 
 Run ./buildDocker.sh only once
@@ -64,21 +76,15 @@ Run docker ps -a # to get the container_ID
 
 docker start container_ID
 
-docker attach container_ID 
+docker attach container_ID
+
+cd /app/ICAPS_Summer_School_RAE_2020/RAE_and_UPOM 
+
+python3 testRAEandUPOM.py --domain CR --problem problem5
 
 exit # To exit from docker container 
 
-CONDA SETUP STEPS:
 
-conda env create -f RAE.yml
-
-ON YOUR LOCAL TERMINAL:
-
-To test problem1 of Spring door, use the commands:
-
-cd ./RAE_and_UPOM
-
-python3 testRAEandUPOM.py --domain SD --problem problem1
 
 
 
